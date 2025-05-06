@@ -2,6 +2,7 @@
 package aiss.PIntegracion.ProIntegracion.model;
 
 import javax.annotation.Generated;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -50,12 +51,12 @@ public class Comment {
 
     @JsonProperty("author")
     public User getAuthor() {
-        return user;
+        return author;
     }
 
     @JsonProperty("Author")
     public void setAuthor(User Author) {
-        this.user = Author;
+        this.author = Author;
     }
 
     @JsonProperty("created_at")

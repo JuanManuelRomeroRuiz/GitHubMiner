@@ -22,7 +22,7 @@ public class Comment {
     @JsonProperty("body")
     private String body;
     @JsonProperty("author")
-    private User user;
+    private User author;
     @JsonProperty("created_at")
     private String createdAt;
     @JsonProperty("updated_at")
@@ -92,7 +92,7 @@ public class Comment {
         sb.append(',');
         sb.append("user");
         sb.append('=');
-        sb.append(((this.user == null)?"<null>":this.user));
+        sb.append(((this.author == null)?"<null>":this.author));
         sb.append(',');
         sb.append("createdAt");
         sb.append('=');

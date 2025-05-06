@@ -23,26 +23,26 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class User {
 
     @JsonProperty("login")
-    private String login;
+    private String username;
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("avatar_url")
-    private String avatarUrl;
+    private String avatar_Url;
     @JsonProperty("url")
-    private String url;
+    private String web_url;
     @JsonProperty("name")
     private String name;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonProperty("login")
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
     @JsonProperty("login")
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @JsonProperty("id")
@@ -57,22 +57,22 @@ public class User {
 
     @JsonProperty("avatar_url")
     public String getAvatarUrl() {
-        return avatarUrl;
+        return avatar_Url;
     }
 
     @JsonProperty("avatar_url")
     public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+        this.avatar_Url = avatarUrl;
     }
 
     @JsonProperty("url")
-    public String getUrl() {
-        return url;
+    public String getWeb_url() {
+        return web_url;
     }
 
     @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
+    public void setWeb_url(String web_url) {
+        this.web_url = web_url;
     }
 
     @JsonProperty("name")
@@ -99,21 +99,21 @@ public class User {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(User.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("login");
+        sb.append("username");
         sb.append('=');
-        sb.append(((this.login == null)?"<null>":this.login));
+        sb.append(((this.username == null)?"<null>":this.username));
         sb.append(',');
         sb.append("id");
         sb.append('=');
         sb.append(((this.id == null)?"<null>":this.id));
         sb.append(',');
-        sb.append("avatarUrl");
+        sb.append("avatar_Url");
         sb.append('=');
-        sb.append(((this.avatarUrl == null)?"<null>":this.avatarUrl));
+        sb.append(((this.avatar_Url == null)?"<null>":this.avatar_Url));
         sb.append(',');
-        sb.append("url");
+        sb.append("web_url");
         sb.append('=');
-        sb.append(((this.url == null)?"<null>":this.url));
+        sb.append(((this.web_url == null)?"<null>":this.web_url));
         sb.append(',');
         sb.append("name");
         sb.append('=');

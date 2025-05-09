@@ -15,11 +15,17 @@ public class ProjectService {
 
     public Project getProject(String owner, String repo) {
 
-
         String uri = "https://api.github.com/repos/"+ owner + "/" + repo;
         Project project = restTemplate.getForObject(uri, Project.class);
         assert project != null;
         return project;
+    }
+
+    public void createProject(String owner, String repo, Integer sinceCommits, Integer sinceIssues, Integer maxPages){
+
+    Project project = getProject(owner, repo);
+
+
     }
 
 }

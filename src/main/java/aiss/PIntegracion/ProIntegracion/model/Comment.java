@@ -19,10 +19,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Comment {
 
     @JsonProperty("id")
-    private Integer id;
+    private Long id;
     @JsonProperty("body")
     private String body;
-    @JsonProperty("author")
+    @JsonProperty("user")
     private User author;
     @JsonProperty("created_at")
     private String createdAt;
@@ -30,12 +30,12 @@ public class Comment {
     private String updatedAt;
 
     @JsonProperty("id")
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,12 +49,12 @@ public class Comment {
         this.body = body;
     }
 
-    @JsonProperty("author")
+    @JsonProperty("user")
     public User getAuthor() {
         return author;
     }
 
-    @JsonProperty("Author")
+    @JsonProperty("user")
     public void setAuthor(User Author) {
         this.author = Author;
     }

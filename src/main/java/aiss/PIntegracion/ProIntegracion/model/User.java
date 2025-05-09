@@ -25,7 +25,7 @@ public class User {
     @JsonProperty("login")
     private String username;
     @JsonProperty("id")
-    private Integer id;
+    private Long id;
     @JsonProperty("avatar_url")
     private String avatar_Url;
     @JsonProperty("url")
@@ -46,12 +46,12 @@ public class User {
     }
 
     @JsonProperty("id")
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

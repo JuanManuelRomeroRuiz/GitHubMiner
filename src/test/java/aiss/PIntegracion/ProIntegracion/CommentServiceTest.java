@@ -21,7 +21,7 @@ public class CommentServiceTest {
     public void testgetComments() {
 
         List<Comment> comments = new ArrayList<>();
-        comments = (List<Comment>) commentService.getComments("https://api.github.com/repos/spring-projects/spring-framework/issues/34863/comments");
+        comments = (List<Comment>) commentService.getComments("https://api.github.com/repos/spring-projects/spring-framework/issues/34863/comments",2);
         System.out.println(comments);
     }
 }

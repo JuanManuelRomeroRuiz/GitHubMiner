@@ -19,7 +19,7 @@ public class CommitServiceTest {
     public void testgetCommits() {
 
         List<Commit> commits = new ArrayList<>();
-        commits = (List<Commit>) commitService.getCommits("spring-projects","spring-framework");
+        commits = (List<Commit>) commitService.getCommits("spring-projects","spring-framework",2,2);
         System.out.println(commits);
     }
 }

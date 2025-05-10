@@ -21,7 +21,7 @@ public class IssueServiceTest {
     public void testgetIssues() {
 
         List<Issue> issues = new ArrayList<>();
-        issues = (List<Issue>) issueService.getIssues("spring-projects","spring-framework", 20,20);
+        issues = (List<Issue>) issueService.getIssues("spring-projects","spring-framework", 2,2);
         System.out.println(issues);
     }
 }

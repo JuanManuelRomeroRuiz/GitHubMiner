@@ -88,9 +88,10 @@ public class ProjectService {
             tissue.setLabels(l);
             tissue.setVotes(issue.getComments());
 
-            Tuser tauthor = new Tuser();
-            if (issue.getUser() != null) {
+            Tuser tauthor = null;
+            if (issue.getUser() != null && issue.getUser().getId() != null) {
 
+                tauthor = new Tuser();
                 tauthor.setId(issue.getUser().getId().toString());
                 tauthor.setUsername(issue.getUser().getUsername());
                 tauthor.setName(issue.getUser().getName());
@@ -100,9 +101,11 @@ public class ProjectService {
 
             tissue.setAuthor(tauthor);
 
-            Tuser assignee = new Tuser();
-            if (issue.getAssignee() != null) {
+            Tuser assignee = null;
+            if (issue.getAssignee() != null && issue.getAssignee().getId() != null) {
 
+
+                assignee = new Tuser();
                 assignee.setId(issue.getAssignee().getId().toString());
                 assignee.setUsername(issue.getAssignee().getUsername());
                 assignee.setName(issue.getAssignee().getName());
@@ -124,10 +127,11 @@ public class ProjectService {
                 tcomment.setCreatedAt(comment.getCreatedAt());
                 tcomment.setUpdatedAt(comment.getUpdatedAt());
 
-                Tuser author = new Tuser();
+                Tuser author = null;
 
-                if (comment.getAuthor() != null) {
+                if (comment.getAuthor() != null && comment.getAuthor().getId() != null) {
 
+                    author = new Tuser();
                     author.setId(comment.getAuthor().getId().toString());
                     author.setUsername(comment.getAuthor().getUsername());
                     author.setName(comment.getAuthor().getName());
@@ -204,9 +208,10 @@ public class ProjectService {
             tissue.setLabels(l);
             tissue.setVotes(issue.getComments());
 
-            Tuser tauthor = new Tuser();
-            if (issue.getUser() != null) {
+            Tuser tauthor = null;
+            if (issue.getUser() != null && issue.getUser().getId() != null) {
 
+                tauthor = new Tuser();
                 tauthor.setId(issue.getUser().getId().toString());
                 tauthor.setUsername(issue.getUser().getUsername());
                 tauthor.setName(issue.getUser().getName());
@@ -216,9 +221,10 @@ public class ProjectService {
 
             tissue.setAuthor(tauthor);
 
-            Tuser assignee = new Tuser();
-            if (issue.getAssignee() != null) {
+            Tuser assignee = null;
+            if (issue.getAssignee() != null && issue.getAssignee().getId() != null) {
 
+                assignee = new Tuser();
                 assignee.setId(issue.getAssignee().getId().toString());
                 assignee.setUsername(issue.getAssignee().getUsername());
                 assignee.setName(issue.getAssignee().getName());
@@ -240,10 +246,11 @@ public class ProjectService {
                 tcomment.setCreatedAt(comment.getCreatedAt());
                 tcomment.setUpdatedAt(comment.getUpdatedAt());
 
-                Tuser author = new Tuser();
+                Tuser author = null;
 
-                if (comment.getAuthor() != null) {
+                if (comment.getAuthor() != null && comment.getAuthor().getId() != null) {
 
+                    author = new Tuser();
                     author.setId(comment.getAuthor().getId().toString());
                     author.setUsername(comment.getAuthor().getUsername());
                     author.setName(comment.getAuthor().getName());
@@ -268,5 +275,3 @@ public class ProjectService {
     }
 
 }
-
-// restTemplate.postForEntity("http://localhost:8080/videominer/channels", youtubeChannelData, Void.class);

@@ -18,9 +18,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "title",
     "description",
     "state",
-    "createdAt",
-    "updatedAt",
-    "closedAt",
+    "created_at",
+    "updated_at",
+    "closed_at",
     "labels",
     "votes",
     "author",
@@ -38,11 +38,11 @@ public class Tissue {
     private String description;
     @JsonProperty("state")
     private String state;
-    @JsonProperty("createdAt")
+    @JsonProperty("created_at")
     private String createdAt;
-    @JsonProperty("updatedAt")
+    @JsonProperty("updated_at")
     private String updatedAt;
-    @JsonProperty("closedAt")
+    @JsonProperty("closed_at")
     private String closedAt;
     @JsonProperty("labels")
     private List<String> labels;
@@ -97,32 +97,32 @@ public class Tissue {
         this.state = state;
     }
 
-    @JsonProperty("createdAt")
+    @JsonProperty("created_at")
     public String getCreatedAt() {
         return createdAt;
     }
 
-    @JsonProperty("createdAt")
+    @JsonProperty("created_at")
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    @JsonProperty("updatedAt")
+    @JsonProperty("updated_at")
     public String getUpdatedAt() {
         return updatedAt;
     }
 
-    @JsonProperty("updatedAt")
+    @JsonProperty("updated_at")
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    @JsonProperty("closedAt")
+    @JsonProperty("closed_at")
     public String getClosedAt() {
         return closedAt;
     }
 
-    @JsonProperty("closedAt")
+    @JsonProperty("closed_at")
     public void setClosedAt(String closedAt) {
         this.closedAt = closedAt;
     }

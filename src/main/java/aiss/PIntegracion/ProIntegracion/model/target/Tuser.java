@@ -16,8 +16,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "id",
     "username",
     "name",
-    "avatarUrl",
-    "webUrl"
+    "avatar_url",
+    "web_url"
 })
 @Generated("jsonschema2pojo")
 public class Tuser {
@@ -28,9 +28,9 @@ public class Tuser {
     private String username;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("avatarUrl")
+    @JsonProperty("avatar_url")
     private String avatarUrl;
-    @JsonProperty("webUrl")
+    @JsonProperty("web_url")
     private String webUrl;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
@@ -65,22 +65,22 @@ public class Tuser {
         this.name = name;
     }
 
-    @JsonProperty("avatarUrl")
+    @JsonProperty("avatar_url")
     public String getAvatarUrl() {
         return avatarUrl;
     }
 
-    @JsonProperty("avatarUrl")
+    @JsonProperty("avatar_url")
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
 
-    @JsonProperty("webUrl")
+    @JsonProperty("web_url")
     public String getWebUrl() {
         return webUrl;
     }
 
-    @JsonProperty("webUrl")
+    @JsonProperty("web_url")
     public void setWebUrl(String webUrl) {
         this.webUrl = webUrl;
     }

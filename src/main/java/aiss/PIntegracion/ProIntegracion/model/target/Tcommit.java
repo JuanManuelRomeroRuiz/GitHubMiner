@@ -16,10 +16,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "id",
     "title",
     "message",
-    "authorName",
-    "authorEmail",
-    "authoredDate",
-    "webUrl"
+    "author_name",
+    "author_email",
+    "authored_date",
+    "web_url"
 })
 @Generated("jsonschema2pojo")
 public class Tcommit {
@@ -30,13 +30,13 @@ public class Tcommit {
     private String title;
     @JsonProperty("message")
     private String message;
-    @JsonProperty("authorName")
+    @JsonProperty("author_name")
     private String authorName;
-    @JsonProperty("authorEmail")
+    @JsonProperty("author_email")
     private String authorEmail;
-    @JsonProperty("authoredDate")
+    @JsonProperty("authored_date")
     private String authoredDate;
-    @JsonProperty("webUrl")
+    @JsonProperty("web_url")
     private String webUrl;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
@@ -71,42 +71,42 @@ public class Tcommit {
         this.message = message;
     }
 
-    @JsonProperty("authorName")
+    @JsonProperty("author_name")
     public String getAuthorName() {
         return authorName;
     }
 
-    @JsonProperty("authorName")
+    @JsonProperty("author_name")
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
     }
 
-    @JsonProperty("authorEmail")
+    @JsonProperty("author_email")
     public String getAuthorEmail() {
         return authorEmail;
     }
 
-    @JsonProperty("authorEmail")
+    @JsonProperty("author_email")
     public void setAuthorEmail(String authorEmail) {
         this.authorEmail = authorEmail;
     }
 
-    @JsonProperty("authoredDate")
+    @JsonProperty("authored_date")
     public String getAuthoredDate() {
         return authoredDate;
     }
 
-    @JsonProperty("authoredDate")
+    @JsonProperty("authored_date")
     public void setAuthoredDate(String authoredDate) {
         this.authoredDate = authoredDate;
     }
 
-    @JsonProperty("webUrl")
+    @JsonProperty("web_url")
     public String getWebUrl() {
         return webUrl;
     }
 
-    @JsonProperty("webUrl")
+    @JsonProperty("web_url")
     public void setWebUrl(String webUrl) {
         this.webUrl = webUrl;
     }
@@ -137,19 +137,19 @@ public class Tcommit {
         sb.append('=');
         sb.append(((this.message == null)?"<null>":this.message));
         sb.append(',');
-        sb.append("authorName");
+        sb.append("author_name");
         sb.append('=');
         sb.append(((this.authorName == null)?"<null>":this.authorName));
         sb.append(',');
-        sb.append("authorEmail");
+        sb.append("author_email");
         sb.append('=');
         sb.append(((this.authorEmail == null)?"<null>":this.authorEmail));
         sb.append(',');
-        sb.append("authoredDate");
+        sb.append("authored_date");
         sb.append('=');
         sb.append(((this.authoredDate == null)?"<null>":this.authoredDate));
         sb.append(',');
-        sb.append("webUrl");
+        sb.append("web_url");
         sb.append('=');
         sb.append(((this.webUrl == null)?"<null>":this.webUrl));
         sb.append(',');

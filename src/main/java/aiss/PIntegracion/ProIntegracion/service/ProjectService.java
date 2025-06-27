@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.http.HttpHeaders;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProjectService {
@@ -157,6 +160,11 @@ public class ProjectService {
 
         Tproject target = new Tproject();
 
+        Map headerMap = new HashMap<String, String>();
+        headerMap.put("Evaluations", "AISS");
+        HttpHeaders.of(headerMap);
+
+
         List<Tcommit> tcommits = new ArrayList<>();
         List<Tissue> tissues = new ArrayList<>();
 
@@ -185,6 +193,9 @@ public class ProjectService {
 
             tcommits.add(tcommit);
         }
+
+
+        target.setCommits(tcommits);
 
         target.setCommits(tcommits);
 

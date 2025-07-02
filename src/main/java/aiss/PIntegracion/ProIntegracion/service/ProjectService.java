@@ -26,252 +26,103 @@ public class ProjectService {
     CommentService commentService;
 
     public Project getProject(String owner, String repo) {
-
-        String uri = "https://api.github.com/repos/"+ owner + "/" + repo;
+        String uri = "https://api.github.com/repos/" + owner + "/" + repo;
         Project project = restTemplate.getForObject(uri, Project.class);
         assert project != null;
         return project;
     }
 
-    public Tproject getProject(String owner, String repo, Integer sinceCommits, Integer sinceIssues, Integer maxPages){
-
-        Tproject target = new Tproject();
-
-        List<Tcommit> tcommits = new ArrayList<>();
-        List<Tissue> tissues = new ArrayList<>();
-
-
-        Project project = getProject(owner, repo);
-        List<Commit> commits = commitService.getCommits(owner, repo, sinceCommits, maxPages);
-        List<Issue> issues = issueService.getIssues(owner, repo, sinceIssues, maxPages);
-
-
-
-        target.setId(project.getId().toString());
-        target.setName(project.getName());
-        target.setWebUrl(project.getUrl());
-
-        for (Commit commit : commits) {
-
-            Tcommit tcommit = new Tcommit();
-
-            tcommit.setId(commit.getSha());
-            tcommit.setTitle("");
-            tcommit.setMessage(commit.getCommit().getMessage());
-            tcommit.setAuthorName(commit.getCommit().getAuthor().getName());
-            tcommit.setAuthorEmail(commit.getCommit().getAuthor().getEmail());
-            tcommit.setAuthoredDate(commit.getCommit().getAuthor().getDate());
-            tcommit.setWebUrl(commit.getUrl());
-
-            tcommits.add(tcommit);
-        }
-
-        target.setCommits(tcommits);
-
-        for (Issue issue : issues) {
-            Tissue tissue = new Tissue();
-
-            tissue.setId(issue.getId().toString());
-            tissue.setTitle(issue.getTitle());
-            tissue.setDescription(issue.getBody());
-            tissue.setState(issue.getState());
-            tissue.setCreatedAt(tissue.getCreatedAt());
-            tissue.setUpdatedAt(tissue.getUpdatedAt());
-            tissue.setClosedAt(tissue.getClosedAt());
-
-            List<String> l = new ArrayList<>();
-            List<Label> lab = issue.getLabels();
-            for (Label label : lab) {
-                l.add(label.getName());
-            }
-
-            tissue.setLabels(l);
-            tissue.setVotes(issue.getComments());
-
-            Tuser tauthor = null;
-            if (issue.getUser() != null && issue.getUser().getId() != null) {
-
-                tauthor = new Tuser();
-                tauthor.setId(issue.getUser().getId().toString());
-                tauthor.setUsername(issue.getUser().getUsername());
-                tauthor.setName(issue.getUser().getName());
-                tauthor.setAvatarUrl(issue.getUser().getAvatarUrl());
-                tauthor.setWebUrl(issue.getUser().getWeb_url());
-            }
-
-            tissue.setAuthor(tauthor);
-
-            Tuser assignee = null;
-            if (issue.getAssignee() != null && issue.getAssignee().getId() != null) {
-
-
-                assignee = new Tuser();
-                assignee.setId(issue.getAssignee().getId().toString());
-                assignee.setUsername(issue.getAssignee().getUsername());
-                assignee.setName(issue.getAssignee().getName());
-                assignee.setAvatarUrl(issue.getAssignee().getAvatarUrl());
-                assignee.setWebUrl(issue.getAssignee().getWeb_url());
-            }
-
-            tissue.setAssignee(assignee);
-
-            List<Comment> comments = commentService.getComments(issue.getCommentsUrl(),maxPages);
-            List<Tcomment> tcomments = new ArrayList<>();
-
-            for (Comment comment : comments) {
-
-                Tcomment tcomment = new Tcomment();
-
-                tcomment.setId(comment.getId().toString());
-                tcomment.setBody(comment.getBody());
-                tcomment.setCreatedAt(comment.getCreatedAt());
-                tcomment.setUpdatedAt(comment.getUpdatedAt());
-
-                Tuser author = null;
-
-                if (comment.getAuthor() != null && comment.getAuthor().getId() != null) {
-
-                    author = new Tuser();
-                    author.setId(comment.getAuthor().getId().toString());
-                    author.setUsername(comment.getAuthor().getUsername());
-                    author.setName(comment.getAuthor().getName());
-                    author.setAvatarUrl(comment.getAuthor().getAvatarUrl());
-                    author.setWebUrl(comment.getAuthor().getWeb_url());
-                }
-
-                tcomment.setAuthor(author);
-
-                tcomments.add(tcomment);
-            }
-            tissue.setComments(tcomments);
-            tissues.add(tissue);
-        }
-        target.setIssues(tissues);
-
-        return target;
-
-
+    public Tproject getProject(String owner, String repo, Integer sinceCommits, Integer sinceIssues, Integer maxPages) {
+        return buildProject(owner, repo, sinceCommits, sinceIssues, maxPages, false);
     }
 
-    public Tproject createProject(String owner, String repo, Integer sinceCommits, Integer sinceIssues, Integer maxPages){
-
-        Tproject target = new Tproject();
-
-        List<Tcommit> tcommits = new ArrayList<>();
-        List<Tissue> tissues = new ArrayList<>();
-
-
-        Project project = getProject(owner, repo);
-        List<Commit> commits = commitService.getCommits(owner, repo, sinceCommits, maxPages);
-        List<Issue> issues = issueService.getIssues(owner, repo, sinceIssues, maxPages);
-
-
-
-        target.setId(project.getId().toString());
-        target.setName(project.getName());
-        target.setWebUrl(project.getUrl());
-
-        for (Commit commit : commits) {
-
-            Tcommit tcommit = new Tcommit();
-
-            tcommit.setId(commit.getSha());
-            tcommit.setTitle("");
-            tcommit.setMessage(commit.getCommit().getMessage());
-            tcommit.setAuthorName(commit.getCommit().getAuthor().getName());
-            tcommit.setAuthorEmail(commit.getCommit().getAuthor().getEmail());
-            tcommit.setAuthoredDate(commit.getCommit().getAuthor().getDate());
-            tcommit.setWebUrl(commit.getUrl());
-
-            tcommits.add(tcommit);
-        }
-
-        target.setCommits(tcommits);
-
-        for (Issue issue : issues) {
-            Tissue tissue = new Tissue();
-
-            tissue.setId(issue.getId().toString());
-            tissue.setTitle(issue.getTitle());
-            tissue.setDescription(issue.getBody());
-            tissue.setState(issue.getState());
-            tissue.setCreatedAt(tissue.getCreatedAt());
-            tissue.setUpdatedAt(tissue.getUpdatedAt());
-            tissue.setClosedAt(tissue.getClosedAt());
-
-            List<String> l = new ArrayList<>();
-            List<Label> lab = issue.getLabels();
-            for (Label label : lab) {
-                l.add(label.getName());
-            }
-
-            tissue.setLabels(l);
-            tissue.setVotes(issue.getComments());
-
-            Tuser tauthor = null;
-            if (issue.getUser() != null && issue.getUser().getId() != null) {
-
-                tauthor = new Tuser();
-                tauthor.setId(issue.getUser().getId().toString());
-                tauthor.setUsername(issue.getUser().getUsername());
-                tauthor.setName(issue.getUser().getName());
-                tauthor.setAvatarUrl(issue.getUser().getAvatarUrl());
-                tauthor.setWebUrl(issue.getUser().getWeb_url());
-            }
-
-            tissue.setAuthor(tauthor);
-
-            Tuser assignee = null;
-            if (issue.getAssignee() != null && issue.getAssignee().getId() != null) {
-
-                assignee = new Tuser();
-                assignee.setId(issue.getAssignee().getId().toString());
-                assignee.setUsername(issue.getAssignee().getUsername());
-                assignee.setName(issue.getAssignee().getName());
-                assignee.setAvatarUrl(issue.getAssignee().getAvatarUrl());
-                assignee.setWebUrl(issue.getAssignee().getWeb_url());
-            }
-
-            tissue.setAssignee(assignee);
-
-            List<Comment> comments = commentService.getComments(issue.getCommentsUrl(),maxPages);
-            List<Tcomment> tcomments = new ArrayList<>();
-
-            for (Comment comment : comments) {
-
-                Tcomment tcomment = new Tcomment();
-
-                tcomment.setId(comment.getId().toString());
-                tcomment.setBody(comment.getBody());
-                tcomment.setCreatedAt(comment.getCreatedAt());
-                tcomment.setUpdatedAt(comment.getUpdatedAt());
-
-                Tuser author = null;
-
-                if (comment.getAuthor() != null && comment.getAuthor().getId() != null) {
-
-                    author = new Tuser();
-                    author.setId(comment.getAuthor().getId().toString());
-                    author.setUsername(comment.getAuthor().getUsername());
-                    author.setName(comment.getAuthor().getName());
-                    author.setAvatarUrl(comment.getAuthor().getAvatarUrl());
-                    author.setWebUrl(comment.getAuthor().getWeb_url());
-                }
-
-                tcomment.setAuthor(author);
-
-                tcomments.add(tcomment);
-            }
-            tissue.setComments(tcomments);
-            tissues.add(tissue);
-        }
-        target.setIssues(tissues);
-
+    public Tproject createProject(String owner, String repo, Integer sinceCommits, Integer sinceIssues, Integer maxPages) {
+        Tproject target = buildProject(owner, repo, sinceCommits, sinceIssues, maxPages, true);
         restTemplate.postForEntity("http://localhost:8080/gitminer/projects", target, Tproject.class);
-
         return target;
-
-
     }
 
+    private Tproject buildProject(String owner, String repo, Integer sinceCommits, Integer sinceIssues, Integer maxPages, boolean post) {
+        Tproject target = new Tproject();
+
+        Project project = getProject(owner, repo);
+        target.setId(project.getId().toString());
+        target.setName(project.getName());
+        target.setWebUrl(project.getUrl());
+
+        List<Commit> commits = commitService.getCommits(owner, repo, sinceCommits, maxPages);
+        List<Issue> issues = issueService.getIssues(owner, repo, sinceIssues, maxPages);
+
+        target.setCommits(mapCommits(commits));
+        target.setIssues(mapIssues(issues, maxPages));
+
+        return target;
+    }
+
+    private List<Tcommit> mapCommits(List<Commit> commits) {
+        List<Tcommit> tcommits = new ArrayList<>();
+        for (Commit commit : commits) {
+            Tcommit tcommit = new Tcommit();
+            tcommit.setId(commit.getSha());
+            tcommit.setTitle("");
+            tcommit.setMessage(commit.getCommit().getMessage());
+            tcommit.setAuthorName(commit.getCommit().getAuthor().getName());
+            tcommit.setAuthorEmail(commit.getCommit().getAuthor().getEmail());
+            tcommit.setAuthoredDate(commit.getCommit().getAuthor().getDate());
+            tcommit.setWebUrl(commit.getUrl());
+            tcommits.add(tcommit);
+        }
+        return tcommits;
+    }
+
+    private List<Tissue> mapIssues(List<Issue> issues, Integer maxPages) {
+        List<Tissue> tissues = new ArrayList<>();
+        for (Issue issue : issues) {
+            Tissue tissue = new Tissue();
+            tissue.setId(issue.getId().toString());
+            tissue.setTitle(issue.getTitle());
+            tissue.setDescription(issue.getBody());
+            tissue.setState(issue.getState());
+            tissue.setCreatedAt(issue.getCreatedAt());
+            tissue.setUpdatedAt(issue.getUpdatedAt());
+            tissue.setClosedAt(issue.getClosedAt());
+
+            List<String> labels = new ArrayList<>();
+            for (Label label : issue.getLabels()) {
+                labels.add(label.getName());
+            }
+            tissue.setLabels(labels);
+            tissue.setVotes(issue.getComments());
+
+            tissue.setAuthor(mapUser(issue.getUser()));
+            tissue.setAssignee(mapUser(issue.getAssignee()));
+
+            List<Comment> comments = commentService.getComments(issue.getCommentsUrl(), maxPages);
+            List<Tcomment> tcomments = new ArrayList<>();
+            for (Comment comment : comments) {
+                Tcomment tcomment = new Tcomment();
+                tcomment.setId(comment.getId().toString());
+                tcomment.setBody(comment.getBody());
+                tcomment.setCreatedAt(comment.getCreatedAt());
+                tcomment.setUpdatedAt(comment.getUpdatedAt());
+                tcomment.setAuthor(mapUser(comment.getAuthor()));
+                tcomments.add(tcomment);
+            }
+            tissue.setComments(tcomments);
+
+            tissues.add(tissue);
+        }
+        return tissues;
+    }
+
+    private Tuser mapUser(aiss.PIntegracion.ProIntegracion.model.User user) {
+        if (user == null || user.getId() == null) return null;
+        Tuser tuser = new Tuser();
+        tuser.setId(user.getId().toString());
+        tuser.setUsername(user.getUsername());
+        tuser.setName(user.getName());
+        tuser.setAvatarUrl(user.getAvatarUrl());
+        tuser.setWebUrl(user.getWeb_url());
+        return tuser;
+    }
 }

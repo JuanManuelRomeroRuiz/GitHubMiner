@@ -109,7 +109,6 @@ public class ProjectService {
                 tcomments.add(tcomment);
             }
             tissue.setComments(tcomments);
-
             tissues.add(tissue);
         }
         return tissues;
